@@ -17,6 +17,33 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+    <header class="bg-white shadow-sm">
+        <nav class="navbar navbar-expand-lg navbar-light container">
+            <div class="container-fluid">
+                <a class="navbar-brand text-primary">Convert2PDF</a>
+                <!-- Quando a largura da tela diminuir até certo ponto, as opções da navbar vai ser substituídas por um botão colapsável que exibe os atalhos ao clicar -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <!-- Define os atalhos da navbar -->
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="index.html">Início</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="combinar-pdf.html">Imagem para PDF</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="image-to-pdf.html">Combinar PDF</a>
+                        </li>
+                    </ul>
+                    <div class="d-flex">
+                        <a href="login.html" class="btn btn-outline-primary">Entrar</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
 </body>
 </html>
