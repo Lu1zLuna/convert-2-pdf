@@ -15,9 +15,9 @@ body {
     position: relative; /* Necessário para o posicionamento do pseudo-elemento */
 }
 
-.navbar-nav .nav-link.active {
+ .navbar-nav .nav-link.active {
     font-weight: 600;
-    color: var(--bs-primary) !important;
+    color: #E63946;
 }
 
 /* Aplica o sublinhado nos atalhos APENAS em telas grandes (quando o menu não está colapsado) */
@@ -32,7 +32,7 @@ body {
         right: 0.5rem;
         /* --- */
         height: 3px;
-        background-color: var(--bs-primary);
+        background-color: #E63946;
     }
 }
 
