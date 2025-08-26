@@ -11,12 +11,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
     <!-- Style.css externo -->
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
     <!-- Header com Navbar-->
     <header class="bg-white shadow-sm">
         <nav class="navbar navbar-expand-lg navbar-light container">
@@ -50,7 +50,7 @@
         <!-- Seção Hero -->
         <section class="py-5 text-center container">
             <div class="row py-lg-5">
-                <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="col-lg-10 col-md-10 mx-auto">
                     <h1 class="fw-bold">Suas ferramentas de PDF Simples e Rápidas</h1>
                     <p class="lead text-muted">Converta imagens ou combine múltiplos PDFs em um único arquivo com apenas alguns cliques.</p>
                 </div>
@@ -58,7 +58,7 @@
         </section>
 
         <!-- Seção de cards das Ferramentas -->
-         <section class="py-5 bg-light">
+         <section class=" bg-light">
             <div class="container">
                 <div class="row justify-content-center g-4">
 
@@ -71,7 +71,23 @@
                                     width="64" height="64" fill="currentColor" class="bi bi-image-fill text-primary" viewBox="0 0 16 16">
                                 </div>
                                 <h3 class="card-title fw-bold mb-3">Imagem para PDF</h3>
-                                <p class="card-text text-muted mb-4">Converta arquivos JPG, PNG e TIFF em um documento PDF</p>
+                                <p class="card-text text-muted mb-4">Converta arquivos JPG, PNG e TIFF em um documento PDF.</p>
+                                <a href="image-to-pdf.html" class="btn btn-primary btn-lg">Acessar Ferramenta</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Combinar PDF -->
+                    <div class="col-lg-5 col-md-8">
+                        <div class="card h-100 shadow-sm border-0 text-center tool-card">
+                            <div class="card-body p-5">
+                                <div class="mb-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" class="bi bi-files text-primary" viewBox="0 0 16 16">
+                                        <path d="M13 0H6a2 2 0 0 0-2 2 2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 2 2 0 0 0 2-2V2a2 2 0 0 0-2-2m0 13V4a2 2 0 0 0-2-2H5a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1M3 4a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/>
+                                    </svg>
+                                </div>
+                                <h3 class="card-title fw-bold">Combinar PDFs</h3>
+                                <p class="card-text text-muted mb-4">Junte e organize vários arquivos PDF em um único documento.</p>
                                 <a href="image-to-pdf.html" class="btn btn-primary btn-lg">Acessar Ferramenta</a>
                             </div>
                         </div>
@@ -80,5 +96,13 @@
             </div>
          </section>
     </main>
+
+    <footer class="bg-dark text-white text-center py-4 mt-auto">
+        <div class="container">
+            <p class="m-0">&copy; Convert2PDF.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
 </body>
 </html>
