@@ -4,8 +4,10 @@ body {
 }
 .navbar-brand {
     font-weight: 700;
-    font-size: 1.8rem;
+    font-size: 2.25rem;
+    color: #E63946;
 }
+
 /* Estilo para o link de navegação ativo */
 .navbar-nav .nav-link {
     position: relative; /* Necessário para o posicionamento do pseudo-elemento */
