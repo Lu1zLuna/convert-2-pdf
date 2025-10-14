@@ -4,6 +4,12 @@ const path = require('path');
 const app = express();
 const port = 3000;
 
+// Middleware para espionar todas as requisições
+app.use((req, res, next) => {
+    console.log(`Alguém visitou a URL: ${req.url}`);
+    next(); // 'next()' passa a requisição para o próximo na fila.
+});
+
 //Configuração do express
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
