@@ -9,7 +9,7 @@ router.get('/', pageController.getHomePage);
 router.get('/faq', pageController.getFaqPage);
 router.get('/login', pageController.getLoginPage);
 router.get('/register', pageController.getRegisterPage);
-router.get('/image-to-pdf', pageController.getImageToPdf);
+router.get('/image-to-pdf', pageController.getImageToPdfPage);
 router.get('/combinar-pdf', pageController.getCombinarPdf);
 
 // Exporta o router para o server.js
