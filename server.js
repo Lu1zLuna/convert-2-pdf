@@ -1,11 +1,23 @@
-const express = require('express')
-const app = express()
-const port = 3000
+// Importações e configurações iniciais
+const express = require('express');
+const path = require('path');
+const app = express();
+const port = 3000;
 
-app.get('/', (req, res) => {
-    res.send('Hello World!')
-})
+//Configuração do express
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
+// Faz o conteúdo no public ser enxergado como se estivesse no diretório raiz
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Importar o arquivo de rotas
+const pageRoutes = require('./routes/pageRoutes');
+
+// Usar as rotas definidas em pageRoutes.js para qualquer requisição no site
+app.use('/', pageRoutes);
+
+// Iniciando o Servidor
 app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
-})
+    console.log(`Servidor rodando! Acesse em http://localhost:${port}`);
+});
