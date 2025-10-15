@@ -7,6 +7,9 @@ const port = 3000;
 // Iniciando o Servidor
 app.listen(port, () => console.log(`Servidor rodando! Acesse em http://localhost:${port}`));
 
+// Permite ler dados dos formulários
+app.use(express.urlencoded({ extended: true }));
+
 // Middleware para espionar todas as requisições
 app.use((req, res, next) => {
     console.log(`Alguém visitou a URL: ${req.url}`);
@@ -23,5 +26,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Importar o arquivo de rotas
 const pageRoutes = require('./routes/pageRoutes');
 
-// Usar as rotas definidas em pageRoutes.js para qualquer requisição no site
+// Usar as rotas
 app.use('/', pageRoutes);
+app.use('/', authRoutes);
