@@ -4,6 +4,9 @@ const path = require('path');
 const app = express();
 const port = 3000;
 
+// Iniciando o Servidor
+app.listen(port, () => console.log(`Servidor rodando! Acesse em http://localhost:${port}`));
+
 // Middleware para espionar todas as requisições
 app.use((req, res, next) => {
     console.log(`Alguém visitou a URL: ${req.url}`);
@@ -22,6 +25,3 @@ const pageRoutes = require('./routes/pageRoutes');
 
 // Usar as rotas definidas em pageRoutes.js para qualquer requisição no site
 app.use('/', pageRoutes);
-
-// Iniciando o Servidor
-app.listen(port, () => console.log(`Servidor rodando! Acesse em http://localhost:${port}`));
