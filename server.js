@@ -4,8 +4,13 @@ const path = require('path');
 const app = express();
 const port = 3000;
 
-// Iniciando o Servidor
-app.listen(port, () => console.log(`Servidor rodando! Acesse em http://localhost:${port}`));
+// Configuração do express-session
+app.use(session({
+    secret: 'chave-secreta-random',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false }
+}))
 
 // Permite ler dados dos formulários
 app.use(express.urlencoded({ extended: true }));
@@ -23,9 +28,13 @@ app.set('views', path.join(__dirname, 'views'));
 // Faz o conteúdo no public ser enxergado como se estivesse no diretório raiz
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Importar o arquivo de rotas
+// Importar os arquivos de rotas
 const pageRoutes = require('./routes/pageRoutes');
+const authRoute = require('./routes/authRoutes');
 
 // Usar as rotas
 app.use('/', pageRoutes);
 app.use('/', authRoutes);
+
+// Iniciando o Servidor
+app.listen(port, () => console.log(`Servidor rodando! Acesse em http://localhost:${port}`));
