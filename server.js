@@ -24,6 +24,4 @@ const pageRoutes = require('./routes/pageRoutes');
 app.use('/', pageRoutes);
 
 // Iniciando o Servidor
-app.listen(port, () => {
-    console.log(`Servidor rodando! Acesse em http://localhost:${port}`);
-});
+app.listen(port, () => console.log(`Servidor rodando! Acesse em http://localhost:${port}`));
