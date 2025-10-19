@@ -1,6 +1,7 @@
 // Importações e configurações iniciais
 const express = require('express');
 const path = require('path');
+const session = require('express-session');
 const app = express();
 const port = 3000;
 
@@ -18,7 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 // Middleware para espionar todas as requisições
 app.use((req, res, next) => {
     console.log(`Alguém visitou a URL: ${req.url}`);
-    next(); // 'next()' passa a requisição para o próximo na fila.
+    next(); // 'next()' vai passar a requisição para o próximo na fila.
 });
 
 //Configuração do express
@@ -30,7 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Importar os arquivos de rotas
 const pageRoutes = require('./routes/pageRoutes');
-const authRoute = require('./routes/authRoutes');
+const authRoutes = require('./routes/authRoutes');
 
 // Usar as rotas
 app.use('/', pageRoutes);
