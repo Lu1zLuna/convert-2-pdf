@@ -1,5 +1,8 @@
 const express = require('express');
 const router = express.Router();
+const { body } = require('express-validator');
+const authController = require('../controllers/authController');
+const User = require('../models/User');
 
 // Importa o authController
 const authController = require('../controllers/authController');
