@@ -141,3 +141,6 @@ vite.config.ts.timestamp-*
 # index referência
 index-bootstrap.html
 index1.html
+
+# Banco de dados
+db.json
