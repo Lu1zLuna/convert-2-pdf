@@ -1,0 +1,25 @@
+<%# Verifica se há erros de validação (que é um array) %>
+<% if (locals.validation_errors && validation_errors.length > 0) { %>
+    <div class="alert alert-danger" role="alert">
+        <ul class="mb-0">
+            <% validation_errors.forEach(function(error) { %>
+                <li><%= error %></li>
+            <% }); %>
+        </ul>
+    </div>
+<% } %>
+
+<%# Verifica se há uma mensagem de erro única (string) %>
+<% if (locals.error_msg && error_msg.length > 0) { %>
+    <div class="alert alert-danger" role="alert">
+        <%= error_msg %>
+    </div>
+<% } %>
+
+<%# Verifica se há uma mensagem de sucesso única (string) %>
+<% if (locals.success_msg && success_msg.length > 0) { %>
+    <div class="alert alert-success" role="alert">
+        <%= success_msg %>
+    </div>
+<% } %>
+
