@@ -38,13 +38,17 @@ const findByEmail = (email) => {
 const create = (newUser) => {
     const data = readUsers();
 
+    // Normaliza o email do usuário novo antes de salvar
     const userNormalizado = {
         ...newUser,
         email: newUser.email.toLowerCase()
     };
 
     // Gera um id único pro novo usuário
-    const userWithId = { id: crypto.randomUUID(), ...newUser };
+    const userWithId = { 
+        id: crypto.randomUUID(),
+         ...userNormalizado
+    };
 
     data.users.push(userWithId);
     writeUsers(data);
