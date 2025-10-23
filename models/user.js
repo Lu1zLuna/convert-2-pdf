@@ -10,6 +10,10 @@ const readUsers = () => {
         return { users: [] }
     }
     const data = fs.readFileSync(dbPath, 'utf-8');
+    // Verifica se o arquivo está vazio
+    if (data.length === 0) {
+        return { users: [] };
+    }
     return JSON.parse(data);
 };
 
@@ -18,19 +22,26 @@ const writeUsers = (data) => {
     fs.writeFileSync(dbPath, JSON.stringify(data, null, 2));
 };
 
-const buscar = () => {
-    const { users } = readUsers;
+const find = () => {
+    const { users } = readUsers();
     return users;
 };
 
-const buscarPorEmail = (email) => {
+const findByEmail = (email) => {
     const data = readUsers();
-    return users.find(user => user.email === email);
+    const emailNormalizado = email.toLowerCase();
+
+    return data.users.find(user => user.email === emailNormalizado);
 }
 
 // Função para criar novo usuário
 const create = (newUser) => {
     const data = readUsers();
+
+    const userNormalizado = {
+        ...newUser,
+        email: newUser.email.toLowerCase()
+    };
 
     // Gera um id único pro novo usuário
     const userWithId = { id: crypto.randomUUID(), ...newUser };
@@ -42,7 +53,7 @@ const create = (newUser) => {
 } 
 
 
-// exporta as funções para usar nos controllesrs
+// exporta as funções para usar nos controllers
 module.exports = {
     find,
     findByEmail,
