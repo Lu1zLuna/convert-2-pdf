@@ -2,10 +2,6 @@ exports.getHomePage = (req, res) => {
     res.render('index');
 }
 
-exports.getFaqPage = (req, res) => {
-    res.render('faq');
-}
-
 exports.getLoginPage = (req, res) => {
     res.render('login');
 }
