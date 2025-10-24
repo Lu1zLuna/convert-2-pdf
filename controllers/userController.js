@@ -13,6 +13,7 @@ exports.getUserPanel = (req, res) => {
     }
 }
 
+// --- UPDATE ---
 exports.postUpdateProfile = (req, res) => {
     const { nome } = req.body;
     const email = req.session.user.email;
@@ -24,6 +25,7 @@ exports.postUpdateProfile = (req, res) => {
     res.redirect('/painel');
 }
 
+// --- DELETE ---
 exports.postDeleteAccount = (req, res) => {
     const email = req.session.user.email;
     userModel.remove(email);

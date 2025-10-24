@@ -22,18 +22,7 @@ const writeUsers = (data) => {
     fs.writeFileSync(dbPath, JSON.stringify(data, null, 2));
 };
 
-const find = () => {
-    const { users } = readUsers();
-    return users;
-};
-
-const findByEmail = (email) => {
-    const data = readUsers();
-    const emailNormalizado = email.toLowerCase();
-
-    return data.users.find(user => user.email === emailNormalizado);
-}
-
+//--- CREATE ---
 // Função para criar novo usuário
 const create = (newUser) => {
     const data = readUsers();
@@ -56,6 +45,20 @@ const create = (newUser) => {
     return userWithId;
 } 
 
+// --- READ ---
+const find = () => {
+    const { users } = readUsers();
+    return users;
+};
+
+const findByEmail = (email) => {
+    const data = readUsers();
+    const emailNormalizado = email.toLowerCase();
+
+    return data.users.find(user => user.email === emailNormalizado);
+}
+
+// --- UPDATE ---
 const update = (email, updates) => {
     const data = readUsers();
     const emailNormalizado = email.toLowerCase();
@@ -67,6 +70,7 @@ const update = (email, updates) => {
     writeUsers(data);
 }
 
+// --- DELETE ---
 const remove = (email) => {
     const data = readUsers();
     const emailNormalizado = email.toLowerCase();
