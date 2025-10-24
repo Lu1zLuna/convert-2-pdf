@@ -1,3 +1,5 @@
+const userModel = require('../models/user')
+
 // GET /painel
 exports.getUserPanel = (req, res) => {
     // Verifica se existe um usuário na sessão
@@ -10,3 +12,24 @@ exports.getUserPanel = (req, res) => {
         res.redirect('/login');
     }
 }
+
+exports.postUpdateProfile = (req, res) => {
+    const { nome } = req.body;
+    const email = req.session.user.email;
+
+    userModel.update(email, { nome });
+    req.session.user.nome = nome;
+
+    req.flash('success_msg', 'Perfil atualizado com sucesso!');
+    res.redirect('/painel');
+}
+
+exports.postDeleteAccount = (req, res) => {
+    const email = req.session.user.email;
+    userModel.remove(email);
+    req.flash('success_msg', 'Conta excluída com sucesso!');
+
+    req.session.destroy(() => {
+        res.redirect('/');
+    })
+};
