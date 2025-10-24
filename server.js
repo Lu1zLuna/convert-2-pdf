@@ -44,13 +44,14 @@ app.use(flash());
 app.use((req, res, next) => {
     // --- mensagens ---
     
+    // cria uma variável se houver uma sessão de usuário logado
+    res.locals.user = req.session.user || null;
+
     //sucesso
     res.locals.success_msg = req.flash('success_msg');
 
     //erro
     res.locals.error_msg = req.flash('error_msg');
-
-    
 
     //erros de validação do express-validator
     res.locals.validation_errors = req.flash('validation_errors');
