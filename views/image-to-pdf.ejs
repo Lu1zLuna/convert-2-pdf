@@ -65,8 +65,8 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
                         <div class="card shadow-sm border-0">
-                            <div class="card-body p-4 p-md-5">
-                                <div class="upload-area rounded p-5 text-center mb-4">
+                            <div class="card-body ps-md-5 pe-md-5 pt-md-5">
+                                <div class="upload-area rounded p-5 text-center">
                                     <h3 class="fs-5 fw-bold mt-3 mb-2">Arraste e solte os arquivos aqui</h3>
                                     <p class="text-muted mb-3">ou</p>
                                     <label for="file-input" class="btn btn-primary">Selecione os arquivos</label>
@@ -76,6 +76,9 @@
                             <div class="file-list">
                                 <p class="text-muted text-center">Nenhum arquivo selecionado.</p>
                             </div>
+
+                            <div id="upload-message" class="text-center mt-0 text-muted"></div>
+
                             <div class="text-center">
                                 <button class="btn btn-secondary btn-lg mb-4" disabled>Converter para PDF</button>
                             </div>
@@ -92,5 +95,37 @@
         </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <!-- Carrega os arquivos de que foram uploadados na view -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+        const input = document.getElementById("file-input");
+        const uploadMessage = document.getElementById("upload-message");
+        const fileList = document.querySelector(".file-list p");
+
+        input.addEventListener("change", () => {
+            const files = Array.from(input.files);
+
+             // limpa o conteúdo anterior da lista
+            fileList.innerHTML = "";
+
+            if (files.length === 0) {
+            uploadMessage.textContent = "";
+            fileList.innerHTML = `<p class="text-muted text-center">Nenhum arquivo selecionado.</p>`;
+            return;
+            }
+
+            // Atualiza a lista de arquivos
+            const nomes = files.map(f => f.name).join(", ");
+
+            // Exibe a mensagem de envio
+            uploadMessage.innerHTML = `
+            <div class="alert alert-info mx-5 mt-0 mb-3 text-center" role="alert">
+                Você está enviando ${files.length > 1 ? 'esses arquivos' : 'esse arquivo'} para conversão: <strong>${nomes}</strong>
+            </div>
+            `;
+        });
+        });
+    </script>
 </body>
 </html>
