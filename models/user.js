@@ -56,10 +56,31 @@ const create = (newUser) => {
     return userWithId;
 } 
 
+const update = (email, updates) => {
+    const data = readUsers();
+    const emailNormalizado = email.toLowerCase();
+
+    data.users = data.users.map(user => 
+        user.email === emailNormalizado ? { ...user, ...updates} : user
+    );
+
+    writeUsers(data);
+}
+
+const remove = (email) => {
+    const data = readUsers();
+    const emailNormalizado = email.toLowerCase();
+    
+    data.users = data.users.filter(user => user.email !== emailNormalizado);
+
+    writeUsers(data);
+}
 
 // exporta as funções para usar nos controllers
 module.exports = {
     find,
     findByEmail,
     create,
+    update,
+    remove
 };
