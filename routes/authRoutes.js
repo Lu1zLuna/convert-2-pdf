@@ -17,12 +17,18 @@ router.post(
             .notEmpty().withMessage('O campo nome é obrigatório'),
 
         // regra 2: o campo 'email' deve ser um e-mail válido.
-            body('email')
-                .isEmail().withMessage('Por favor, insira um e-mail válido'),
+        body('email')
+            .isEmail().withMessage('Por favor, insira um e-mail válido'),
 
         //regra 3: o campo 'senha' deve ter no mínimo 8 caracteres
         body('senha')
-            .isLength({ min: 8}).withMessage('A senha deve ter no mínimo 8 caracteres.')
+            .isLength({ min: 6}).withMessage('A senha deve ter no mínimo 8 caracteres.'),
+
+        // regra 4: o campo 'confirmarSenha' deve ser igual ao campo 'senha'
+        body('confirmarSenha')
+            .custom((value, { req }) => value === req.body.senha)
+            .withMessage('As senhas não coincidem.')
+
     ],
     authController.postRegister
 );
