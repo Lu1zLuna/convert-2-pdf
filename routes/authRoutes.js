@@ -39,7 +39,12 @@ router.post(
 );
 
 // rota de logout
-router.get('/logout', authController.getLogout);
+router.get('/logout', (req, res) => {
+  req.session.destroy(() => {
+    res.redirect('/');
+  });
+});
+
 
 // Exporta o router para o server.js
 module.exports = router;
