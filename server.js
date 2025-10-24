@@ -2,7 +2,8 @@
 const express = require('express');
 const path = require('path');
 const session = require('express-session');
-const flash = require('connect-flash')
+const flash = require('connect-flash');
+const userRoutes = require('./routes/userRoutes');
 
 // configuração do servidor
 const app = express();
@@ -49,6 +50,8 @@ app.use((req, res, next) => {
     //erro
     res.locals.error_msg = req.flash('error_msg');
 
+    
+
     //erros de validação do express-validator
     res.locals.validation_errors = req.flash('validation_errors');
     next();
@@ -57,6 +60,7 @@ app.use((req, res, next) => {
 // Usar as rotas
 app.use('/', pageRoutes);
 app.use('/', authRoutes);
+app.use('/', userRoutes);
 
 // Iniciando o Servidor
 app.listen(port, () => console.log(`Servidor rodando! Acesse em http://localhost:${port}`));
