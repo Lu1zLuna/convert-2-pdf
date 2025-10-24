@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel do Usuário - Convert2PDF</title>
+
+    <!-- Fontes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- CSS Externo -->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="d-flex flex-column min-vh-100 bg-light">
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky-top">
+        <nav class="navbar navbar-expand-lg navbar-light container">
+            <div class="container-fluid">
+                <a class="navbar-brand fw-bold" href="/">Convert2PDF</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item"><a class="nav-link" href="/">Início</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/image-to-pdf">Imagem para PDF</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/combinar-pdf">Combinar PDF</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/faq">FAQ</a></li>
+                    </ul>
+                    <div class="d-flex">
+                        <a href="/logout" class="btn btn-outline-danger">Sair</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Conteúdo principal -->
+    <main class="flex-grow-1 py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6 col-md-8">
+                    <div class="card shadow-sm border-0">
+                        <div class="card-body p-4 p-md-5 text-center">
+                            <h2 class="fw-bold mb-3">Olá, <%= user.nome %>!</h2>
+                            <p class="text-muted mb-4">Bem-vindo ao seu painel de usuário. Aqui você pode atualizar seus dados ou excluir sua conta.</p>
+
+                            <!-- Formulário de Atualização -->
+                            <form action="/painel/atualizar" method="POST" class="text-start">
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="nome" name="nome" value="<%= user.nome %>" required>
+                                    <label for="nome">Atualizar nome</label>
+                                </div>
+                                <div class="d-grid mb-4">
+                                    <button type="submit" class="btn btn-primary btn-lg">Salvar Alterações</button>
+                                </div>
+                            </form>
+
+                            <!-- Linha divisória -->
+                            <hr class="my-4">
+
+                            <!-- Excluir Conta -->
+                            <form action="/painel/deletar" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir sua conta?');">
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-outline-danger btn-lg">Excluir Conta</button>
+                                </div>
+                            </form>
+
+                            
+                            <!-- Mensagens Flash -->
+                            <div class="mt-4">
+                                <%- include('partials/messages') %>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Seção de atalhos -->
+                    <div class="text-center mt-5">
+                        <h5 class="fw-bold mb-3">Ferramentas disponíveis</h5>
+                        <div class="d-flex justify-content-center gap-3 flex-wrap">
+                            <a href="/image-to-pdf" class="btn btn-outline-primary">Imagem para PDF</a>
+                            <a href="/combinar-pdf" class="btn btn-outline-secondary">Combinar PDFs</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-4 mt-auto">
+        <div class="container">
+            <p class="m-0">&copy; Convert2PDF.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
