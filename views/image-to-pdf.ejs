@@ -42,8 +42,13 @@
                         </li>
                     </ul>
                     <div class="d-flex">
-                        <a href="/login" class="btn btn-outline-primary">Entrar</a>
+                        <% if (user) { %>
+                            <a href="/painel" class="btn btn-primary">Painel</a>
+                        <% } else { %>
+                            <a href="/login" class="btn btn-outline-primary">Entrar</a>
+                        <% } %>
                     </div>
+
                 </div>
             </div>
         </nav>
@@ -88,12 +93,8 @@
             </div>
          </section>
     </main>
-    <!-- Footer -->
-    <footer class="bg-dark text-white text-center py-4 mt-auto">
-        <div class="container">
-            <p class="m-0">&copy; Convert2PDF.</p>
-        </div>
-    </footer>
+    <%- include('partials/footer') %>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="/js/arquivos-selecionados.js"></script>
 </body>
