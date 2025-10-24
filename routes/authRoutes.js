@@ -22,7 +22,7 @@ router.post(
 
         //regra 3: o campo 'senha' deve ter no mínimo 8 caracteres
         body('senha')
-            .isLength({ min: 6}).withMessage('A senha deve ter no mínimo 8 caracteres.'),
+            .isLength({ min: 8}).withMessage('A senha deve ter no mínimo 8 caracteres.'),
 
         // regra 4: o campo 'confirmarSenha' deve ser igual ao campo 'senha'
         body('confirmarSenha')
