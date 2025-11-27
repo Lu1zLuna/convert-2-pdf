@@ -1,17 +1,20 @@
 const express = require('express');
 const router = express.Router();
 const { body } = require('express-validator');
-const { ensureGuest } = require('../middlewares/auth');
 
-// Importa o authController
+// middlewares
+const { ensureGuest, ensureAuth } = require('../middlewares/auth');
+
+// Importa os controllers
+const pageController = require('../controllers/pageController');
 const authController = require('../controllers/authController');
 
-// Define as rotas de autenticação:
+// ===== Define as rotas de autenticação: =====
 
-// GET /register - apenas para quem NÃO está logado
-router.get('/register', ensureGuest, (req, res) => {
-  res.render('register');
-});
+// --- REGISTER ---
+
+// GET /register
+router.get('/register', ensureGuest, pageController.getRegisterPage);
 
 // POST /register - o formulário de registro enviará os dados para esta rota
 router.post(
@@ -39,10 +42,10 @@ router.post(
     authController.postRegister
 );
 
-// GET /login  - apenas para quem NÃO está logado
-router.get('/login', ensureGuest, (req, res) => {
-  res.render('login');
-});
+// --- LOGIN ---
+
+// GET - /login
+router.get('/login', ensureGuest, pageController.getLoginPage);
 
 // POST /login - o formulário de login enviará os dados para esta rota
 router.post(
@@ -55,13 +58,10 @@ router.post(
     authController.postLogin
 );
 
-// rota de logout
-router.get('/logout', (req, res) => {
-  req.session.destroy(() => {
-    res.redirect('/');
-  });
-});
+// --- LOGOUT ---
 
+// GET /logout - usar o controller
+router.get('/logout', ensureAuth, authController.getLogout);
 
 // Exporta o router para o server.js
 module.exports = router;
