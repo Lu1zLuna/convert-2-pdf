@@ -1,13 +1,19 @@
 const express = require('express');
 const router = express.Router();
 const { body } = require('express-validator');
+const { ensureGuest } = require('../middlewares/auth');
 
 // Importa o authController
 const authController = require('../controllers/authController');
 
 // Define as rotas de autenticação:
 
-// o formulário de registro enviará os dados para esta rota
+// GET /register - apenas para quem NÃO está logado
+router.get('/register', ensureGuest, (req, res) => {
+  res.render('register');
+});
+
+// POST /register - o formulário de registro enviará os dados para esta rota
 router.post(
     '/register',
     [
@@ -33,7 +39,12 @@ router.post(
     authController.postRegister
 );
 
-// o formulário de login enviará os dados para esta rota
+// GET /login  - apenas para quem NÃO está logado
+router.get('/login', ensureGuest, (req, res) => {
+  res.render('login');
+});
+
+// POST /login - o formulário de login enviará os dados para esta rota
 router.post(
     '/login',
     [
