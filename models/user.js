@@ -1,90 +1,18 @@
-const fs = require('fs'); // importa file system para ler e escrever arquivos no computador (manipula o db.json)
-const path = require('path'); // permite que os caminhos de arquivos funcionem em qualquer sistema operacional
-const crypto = require('crypto'); // usado para gerar um ID único aleatório
+'use strict';
+const { Model } = require('sequelize');
 
-const dbPath = path.join(__dirname, '..', 'db.json');
-
-// Lê o banco de dados transformando o json em string
-const readUsers = () => {
-    if(!fs.existsSync(dbPath)) {
-        return { users: [] }
+module.exports = (sequelize, DataTypes) => {
+  class User extends Model {
+    static associate(models) {
     }
-    const data = fs.readFileSync(dbPath, 'utf-8');
-    // Verifica se o arquivo está vazio
-    if (data.length === 0) {
-        return { users: [] };
-    }
-    return JSON.parse(data);
-};
-
-// transforma a string de volta em json;
-const writeUsers = (data) => {
-    fs.writeFileSync(dbPath, JSON.stringify(data, null, 2));
-};
-
-//--- CREATE ---
-// Função para criar novo usuário
-const create = (newUser) => {
-    const data = readUsers();
-
-    // Normaliza o email do usuário novo antes de salvar
-    const userNormalizado = {
-        ...newUser,
-        email: newUser.email.toLowerCase()
-    };
-
-    // Gera um id único pro novo usuário
-    const userWithId = { 
-        id: crypto.randomUUID(),
-         ...userNormalizado
-    };
-
-    data.users.push(userWithId);
-    writeUsers(data);
-
-    return userWithId;
-} 
-
-// --- READ ---
-const find = () => {
-    const { users } = readUsers();
-    return users;
-};
-
-const findByEmail = (email) => {
-    const data = readUsers();
-    const emailNormalizado = email.toLowerCase();
-
-    return data.users.find(user => user.email === emailNormalizado);
-}
-
-// --- UPDATE ---
-const update = (email, updates) => {
-    const data = readUsers();
-    const emailNormalizado = email.toLowerCase();
-
-    data.users = data.users.map(user => 
-        user.email === emailNormalizado ? { ...user, ...updates} : user
-    );
-
-    writeUsers(data);
-}
-
-// --- DELETE ---
-const remove = (email) => {
-    const data = readUsers();
-    const emailNormalizado = email.toLowerCase();
-    
-    data.users = data.users.filter(user => user.email !== emailNormalizado);
-
-    writeUsers(data);
-}
-
-// exporta as funções para usar nos controllers
-module.exports = {
-    find,
-    findByEmail,
-    create,
-    update,
-    remove
+  }
+  User.init({
+    nome: DataTypes.STRING,
+    email: DataTypes.STRING,
+    senha: DataTypes.STRING
+  }, {
+    sequelize,
+    modelName: 'User',
+  });
+  return User;
 };

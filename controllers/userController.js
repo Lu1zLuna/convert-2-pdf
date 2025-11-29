@@ -1,37 +1,59 @@
-const userModel = require('../models/user')
+// Importa o modelo através do index criado pelo sequelize
+const { User } = require('../models'); 
 
 // GET /painel
 exports.getUserPanel = (req, res) => {
-    // Verifica se existe um usuário na sessão
+    // A sessão continua igual, não precisa ser async aqui pois pega da memória
     if (req.session.user) {
-        // Se sim, renderiza a view painel.ejs, passando os dados do usuário
         res.render('painel', { user: req.session.user });
     } else {
-        // Se não, volta para a página de login
-        req.flash('error_msg', 'Você precisa estar logado para ver esta página.');
+        req.flash('error_msg', 'Você precisa estar logado.');
         res.redirect('/login');
     }
 }
 
 // --- UPDATE ---
-exports.postUpdateProfile = (req, res) => {
+exports.postUpdateProfile = async (req, res) => {
     const { nome } = req.body;
     const email = req.session.user.email;
 
-    userModel.update(email, { nome });
-    req.session.user.nome = nome;
+    try {
+        // Atualiza no Banco de Dados (SQLite)
+        await User.update({ nome: nome }, {
+            where: { email: email }
+        });
 
-    req.flash('success_msg', 'Perfil atualizado com sucesso!');
-    res.redirect('/painel');
+        // Atualiza a sessão
+        req.session.user.nome = nome;
+
+        req.flash('success_msg', 'Perfil atualizado com sucesso!');
+        res.redirect('/painel');
+    } catch (error) {
+        console.log(error);
+        req.flash('error_msg', 'Erro ao atualizar perfil.');
+        res.redirect('/painel');
+    }
 }
 
 // --- DELETE ---
-exports.postDeleteAccount = (req, res) => {
+exports.postDeleteAccount = async (req, res) => {
     const email = req.session.user.email;
-    userModel.remove(email);
-    req.flash('success_msg', 'Conta excluída com sucesso!');
 
-    req.session.destroy(() => {
-        res.redirect('/');
-    })
+    try {
+        // Deleta do Banco de Dados
+        await User.destroy({
+            where: { email: email }
+        });
+
+        req.flash('success_msg', 'Conta excluída com sucesso!');
+        
+        // Destrói a sessão
+        req.session.destroy(() => {
+            res.redirect('/');
+        });
+    } catch (error) {
+        console.log(error);
+        req.flash('error_msg', 'Erro ao excluir conta.');
+        res.redirect('/painel');
+    }
 };
